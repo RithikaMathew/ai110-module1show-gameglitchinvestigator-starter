@@ -41,15 +41,18 @@ Copilot helped design the pytest cases by suggesting how to check both the outco
 
 ## 4. What did you learn about Streamlit and state?
 
-- In your own words, explain why the secret number kept changing in the original app.
-- How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
-- What change did you make that finally gave the game a stable secret number?
+The secret number kept changing because it was being re-initialized every time the app reran, instead of being stored in Streamlit's session state. Streamlit reruns the script from top to bottom whenever an input changes, which resets variables unless they are stored in session state.
+
+To a friend, I'd explain that Streamlit "reruns" the whole app whenever you interact with it, so you need to use session state to keep important values (like the secret number) stable between reruns.
+
+I fixed the issue by ensuring the secret number is only set once in session state and not overwritten on every rerun.
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
-- What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
-- What is one thing you would do differently next time you work with AI on a coding task?
-- In one or two sentences, describe how this project changed the way you think about AI generated code.
+One habit I want to reuse is writing targeted pytest cases for each bug I fix, to make sure my changes really work. I also found it helpful to use Copilot's suggestions as a starting point, but always verify and test them myself.
+
+Next time, I'll be more careful to check for edge cases and not assume the AI's first suggestion is always correct. I'll also document my process as I go.
+
+This project showed me that AI-generated code can be a great accelerator, but it still requires careful review, testing, and debugging. I learned to treat AI as a teammate, not a replacement for my own reasoning.
