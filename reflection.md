@@ -4,26 +4,38 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 ## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
 
----
+[1. Hints at 95 - say higher but supposed to be lower]
+Expected: When guessing 95 and the secret number is lower, the game should say "Lower!".
+Actual: The game incorrectly says "Higher!".
 
+[2. Can't start a new game]
+Expected: After finishing a game, I should be able to start a new one easily.
+Actual: There is no clear way to reset or start a new game; the game remains stuck.
+
+[3. Accepts values greater than 100]
+Expected: The game should only accept guesses between 1 and 100.
+Actual: It allows guesses above 100, which are out of range and shouldn't be valid.
+
+[4. Countdown attempt incorrect]
+Expected: The number of attempts should decrease correctly after each guess.
+Actual: The countdown does not work as expected, sometimes not decrementing or showing the wrong value.
 ## 2. How did you use AI as a teammate?
 
-- Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
-- Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
-- Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+I used GitHub Copilot in VS Code for this project.
+
+Correct suggestion: Copilot suggested refactoring the check_guess function into logic_utils.py and updating the hint messages so that "Too High" returns "Go LOWER!" and "Too Low" returns "Go HIGHER!". I verified this by running the game and seeing the correct hints, and by running pytest to confirm the logic matched the expected outcomes.
+
+Incorrect/misleading suggestion: At first, Copilot suggested only resetting the attempts and secret number when starting a new game, but missed resetting the score, status, and history. This led to issues where the game state was not fully refreshed. I noticed the bug when the game didn't behave as expected after starting a new game, and fixed it by resetting all relevant session state variables.
 
 ---
 
 ## 3. Debugging and testing your fixes
 
-- How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
-- Did AI help you design or understand any tests? How?
+I decided a bug was fixed by both manually playing the game in Streamlit and running automated tests with pytest. For example, after fixing the hint logic, I added a test that checks if guessing 95 when the secret is 50 returns "Too High" and the message includes "LOWER". All tests passed, confirming the fix.
+
+Copilot helped design the pytest cases by suggesting how to check both the outcome and the hint message. This made it easier to verify that the logic was correct and that the bug was truly resolved.
 
 ---
 
